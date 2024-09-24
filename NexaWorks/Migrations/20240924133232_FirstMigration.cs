@@ -78,23 +78,6 @@ namespace NexaWorks.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tickets",
-                columns: table => new
-                {
-                    TicketID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ResolvedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tickets", x => x.TicketID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -247,6 +230,29 @@ namespace NexaWorks.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    TicketID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ResolvedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    VersionID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.TicketID);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Versions_VersionID",
+                        column: x => x.VersionID,
+                        principalTable: "Versions",
+                        principalColumn: "VersionID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -297,6 +303,11 @@ namespace NexaWorks.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tickets_VersionID",
+                table: "Tickets",
+                column: "VersionID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Versions_ProductID",
                 table: "Versions",
                 column: "ProductID");
@@ -327,9 +338,6 @@ namespace NexaWorks.Migrations
                 name: "Tickets");
 
             migrationBuilder.DropTable(
-                name: "Versions");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -337,6 +345,9 @@ namespace NexaWorks.Migrations
 
             migrationBuilder.DropTable(
                 name: "OperatingSystems");
+
+            migrationBuilder.DropTable(
+                name: "Versions");
 
             migrationBuilder.DropTable(
                 name: "Products");

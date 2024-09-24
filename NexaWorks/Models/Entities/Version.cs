@@ -1,4 +1,8 @@
-﻿namespace NexaWorks.Models.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace NexaWorks.Models.Entities
 {
     public class Version
     {
@@ -9,5 +13,6 @@
         // Relations
         public int ProductID { get; set; }
         public Product Product { get; set; }
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

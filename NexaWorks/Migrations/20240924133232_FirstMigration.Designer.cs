@@ -12,7 +12,7 @@ using NexaWorks.Data;
 namespace NexaWorks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240923150316_FirstMigration")]
+    [Migration("20240924133232_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -310,10 +310,12 @@ namespace NexaWorks.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserID")
+                    b.Property<int>("VersionID")
                         .HasColumnType("int");
 
                     b.HasKey("TicketID");
+
+                    b.HasIndex("VersionID");
 
                     b.ToTable("Tickets");
                 });
@@ -413,6 +415,17 @@ namespace NexaWorks.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("NexaWorks.Models.Entities.Ticket", b =>
+                {
+                    b.HasOne("NexaWorks.Models.Entities.Version", "Version")
+                        .WithMany("Tickets")
+                        .HasForeignKey("VersionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Version");
+                });
+
             modelBuilder.Entity("NexaWorks.Models.Entities.Version", b =>
                 {
                     b.HasOne("NexaWorks.Models.Entities.Product", "Product")
@@ -427,6 +440,11 @@ namespace NexaWorks.Migrations
             modelBuilder.Entity("NexaWorks.Models.Entities.OperatingSystem", b =>
                 {
                     b.Navigation("Compatibilities");
+                });
+
+            modelBuilder.Entity("NexaWorks.Models.Entities.Version", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }
