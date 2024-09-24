@@ -11,6 +11,9 @@ namespace NexaWorks.Models.Entities
         public string Description { get; set; } = string.Empty; // Initialize to avoid nullability issues
         public DateTime CreatedDate { get; set; }
         public DateTime? ResolvedDate { get; set; }
+        public bool IsResolved { get; set; }
+
+        public string? Resolution { get; set; } // Nullable string
 
         // Foreign Keys
        
