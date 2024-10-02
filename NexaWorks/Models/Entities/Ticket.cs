@@ -1,29 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿
 
-namespace NexaWorks.Models.Entities
+using NexaWorks.Models.Entities;
+using OperatingSystem = NexaWorks.Models.Entities.OperatingSystem;
+using Version = NexaWorks.Models.Entities.Version;
+
+public class Ticket
 {
-    public class Ticket
-    {
-        public int TicketID { get; set; }
-        public string Title { get; set; } = string.Empty; // Initialize to avoid nullability issues
-        public string Description { get; set; } = string.Empty; // Initialize to avoid nullability issues
-        public DateTime CreatedDate { get; set; }
-        public DateTime? ResolvedDate { get; set; }
-        public bool IsResolved { get; set; }
+    public int Id { get; set; }
+    public string Description { get; set; }
+    public DateTime CreationDate { get; set; }
+    public DateTime ResolutionDate{ get; set; }
+    public bool Status { get; set; }
+    public string? Resolution { get; set; }
 
-        public string? Resolution { get; set; } // Nullable string
-
-        // Foreign Keys
-       
-        [ForeignKey("Version")]
-        public int VersionID { get; set; }
-
-        // Navigation Properties
-        public Version Version { get; set; } = null!; // Use null-forgiving operator
-
-
-       
-    }
+    // Foreign key
+   public int ProductVersionOperatingSystemId { get; set; }
+    public ProductVersionOperatingSystem ProductVersionOperatingSystem { get; set; }
 }
