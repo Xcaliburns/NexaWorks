@@ -2,7 +2,7 @@
 
 namespace NexaWorks.Models.Entities
 {
-    public class TIcketResolution
+    public class TicketResolution
     {
         public int Id { get; set; }
         public string ResolutionDescription { get; set; }

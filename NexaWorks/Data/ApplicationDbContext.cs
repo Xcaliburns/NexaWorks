@@ -19,7 +19,7 @@ namespace NexaWorks.Data
         public DbSet<OperatingSystem> OperatingSystems { get; set; }
         public DbSet<ProductVersionOperatingSystem> ProductVersionOperatingSystems { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<TIcketResolution> TicketResolutions { get; set; }
+        public DbSet<TicketResolution> TicketResolutions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
