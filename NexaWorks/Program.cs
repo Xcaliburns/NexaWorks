@@ -1,3 +1,5 @@
+//TODO: reactiver le seed quand la db sera correctement configurée
+//using NexaWorks.Data.SeedData; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NexaWorks.Data;
@@ -27,6 +29,13 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+//TODO: Reactiver le seed quand la db sera correctement configurée
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+
+//    await Seed.Initialize(services);
+//}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

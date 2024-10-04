@@ -6,7 +6,7 @@ namespace NexaWorks.Models.Entities
     public class ProductVersionOperatingSystem
     {
         public int Id { get; set; }
-        
+
         [ForeignKey("Version")]
         public int VersionId { get; set; }
 
@@ -17,8 +17,10 @@ namespace NexaWorks.Models.Entities
         public int ProductId { get; set; }
 
         // Relations
-        public Version Version { get; set; }
-        public Product Product { get; set; }
-        public OperatingSystem OperatingSystem { get; set; }
+        public required Version Version { get; set; }
+        public required Product Product { get; set; }
+        public required OperatingSystem OperatingSystem { get; set; }
+
+        public ICollection<Ticket> Tickets { get; set; }
     }
 }

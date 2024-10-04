@@ -38,7 +38,7 @@ namespace NexaWorks.Controllers
         public ActionResult GetItems()
         {
             var items = _context.Tickets
-                                .Where(item => item.Description.Contains("example"))
+                                //.Where(item => item.Description.Contains("example"))
                                 .ToList();
             return View(items);
         }

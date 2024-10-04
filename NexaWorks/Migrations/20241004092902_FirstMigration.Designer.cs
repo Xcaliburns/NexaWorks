@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NexaWorks.Data;
 
@@ -11,9 +12,11 @@ using NexaWorks.Data;
 namespace NexaWorks.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241004092902_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,31 +272,6 @@ namespace NexaWorks.Migrations
                     b.ToTable("ProductVersionOperatingSystems");
                 });
 
-            modelBuilder.Entity("NexaWorks.Models.Entities.TIcketResolution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ResolutionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ResolutionDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TicketId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TicketId");
-
-                    b.ToTable("TicketResolutions");
-                });
-
             modelBuilder.Entity("NexaWorks.Models.Entities.Version", b =>
                 {
                     b.Property<int>("Id")
@@ -436,17 +414,6 @@ namespace NexaWorks.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Version");
-                });
-
-            modelBuilder.Entity("NexaWorks.Models.Entities.TIcketResolution", b =>
-                {
-                    b.HasOne("Ticket", "Ticket")
-                        .WithMany()
-                        .HasForeignKey("TicketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("NexaWorks.Models.Entities.Version", b =>
