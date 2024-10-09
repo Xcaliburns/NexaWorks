@@ -12,7 +12,7 @@ namespace NexaWorks.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger,ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             _context = context;
@@ -20,7 +20,8 @@ namespace NexaWorks.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = _context.Tickets.ToList();
+            return View(items);
         }
 
         public IActionResult Privacy()
@@ -34,14 +35,10 @@ namespace NexaWorks.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
         public ActionResult GetItems()
         {
-            var items = _context.Tickets
-                                //.Where(item => item.Description.Contains("example"))
-                                .ToList();
+            var items = _context.Tickets.ToList();
             return View(items);
         }
-
     }
 }
