@@ -1,14 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using NexaWorks.Models.Entities;
-using System;
-using System.Linq;
 using OperatingSystem = NexaWorks.Models.Entities.OperatingSystem;
-using Version = NexaWorks.Models.Entities.Version;
 using Product = NexaWorks.Models.Entities.Product;
+using ProductVersionOperatingSystem = NexaWorks.Models.Entities.ProductVersionOperatingSystem;
 using Ticket = NexaWorks.Models.Entities.Ticket;
 using TicketResolution = NexaWorks.Models.Entities.TicketResolution;
-using ProductVersionOperatingSystem = NexaWorks.Models.Entities.ProductVersionOperatingSystem;
+using Version = NexaWorks.Models.Entities.Version;
 
 
 namespace NexaWorks.Data.SeedData
@@ -181,14 +177,14 @@ namespace NexaWorks.Data.SeedData
                         using (var transaction = context.Database.BeginTransaction())
                         {
                             await AddTicketResolutionsAsync(context,
-                                  (1, "Résolu en redémarrant l'application",new DateTime(2024,9,2), 1),
-                                  (2, "Mise à jour de l'application",new DateTime(2024,9,4), 3),
-                                  (3, "Réinstallation de l'application",new DateTime(2024,9,6), 5),
+                                  (1, "Résolu en redémarrant l'application", new DateTime(2024, 9, 2), 1),
+                                  (2, "Mise à jour de l'application", new DateTime(2024, 9, 4), 3),
+                                  (3, "Réinstallation de l'application", new DateTime(2024, 9, 6), 5),
                                   (4, "Correction du bug dans le code", new DateTime(2024, 9, 8), 7),
-                                  (5, "Mise à jour du système d'exploitation",new DateTime(2024,9,10), 9),
+                                  (5, "Mise à jour du système d'exploitation", new DateTime(2024, 9, 10), 9),
                                   (6, "Augmentation des ressources serveur", new DateTime(2024, 9, 12), 11),
                                   (7, "Optimisation de la base de données", new DateTime(2024, 9, 14), 13),
-                                  (8, "Correction des permissions", new DateTime(2024, 9, 16), 15),                                  
+                                  (8, "Correction des permissions", new DateTime(2024, 9, 16), 15),
                                   (9, "Mise à jour des dépendances", new DateTime(2024, 9, 18), 17),
                                   (10, "Optimisation de l'API", new DateTime(2024, 9, 20), 19),
                                   (11, "Correction du bug dans le code", new DateTime(2024, 9, 22), 21),

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NexaWorks.Models.Entities;
-using Version = NexaWorks.Models.Entities.Version;
 using OperatingSystem = NexaWorks.Models.Entities.OperatingSystem;
+using Version = NexaWorks.Models.Entities.Version;
 
 
 namespace NexaWorks.Data

@@ -1,8 +1,8 @@
 //TODO: reactiver le using SeedData quand la db est correctement configurée
-using NexaWorks.Data.SeedData; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NexaWorks.Data;
+using NexaWorks.Data.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 

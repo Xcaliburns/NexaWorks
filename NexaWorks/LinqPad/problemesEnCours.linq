@@ -2,7 +2,6 @@
   <Connection>
     <ID>a31347ad-1d53-4cc3-a755-03784cc40d71</ID>
     <NamingServiceVersion>2</NamingServiceVersion>
-    <Persist>true</Persist>
     <Driver Assembly="(internal)" PublicKeyToken="no-strong-name">LINQPad.Drivers.EFCore.DynamicDriver</Driver>
     <AllowDateOnlyTimeOnly>true</AllowDateOnlyTimeOnly>
     <Database>NexaWorks_CodeFirst</Database>

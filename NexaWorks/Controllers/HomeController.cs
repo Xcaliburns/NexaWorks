@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using NexaWorks.Data;
 using NexaWorks.Models;
 using System.Diagnostics;
-using NexaWorks.Models.Entities;
 
 namespace NexaWorks.Controllers
 {

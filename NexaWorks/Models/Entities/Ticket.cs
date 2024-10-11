@@ -1,9 +1,4 @@
-﻿
-
-using NexaWorks.Models.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using OperatingSystem = NexaWorks.Models.Entities.OperatingSystem;
-using Version = NexaWorks.Models.Entities.Version;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NexaWorks.Models.Entities
 {
