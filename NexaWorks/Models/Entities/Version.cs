@@ -4,8 +4,8 @@ namespace NexaWorks.Models.Entities
 {
     public class Version
     {
-        public int Id { get; set; }
-        public float Name { get; set; }
+        public int VersionId { get; set; }
+        public float VersionName { get; set; }
 
         [ForeignKey("Product")]
         public int ProductId { get; set; }

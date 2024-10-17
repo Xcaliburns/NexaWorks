@@ -4,7 +4,7 @@ namespace NexaWorks.Models.Entities
 {
     public class Ticket
     {
-        public int Id { get; set; }
+        public int TicketId { get; set; }
         public DateTime CreationDate { get; set; }
         public bool Status { get; set; }
         public string ProblemDescription { get; set; }
@@ -12,5 +12,7 @@ namespace NexaWorks.Models.Entities
         [ForeignKey("ProductVersionOperatingSystem")]
         public int ProductVersionOperatingSystemId { get; set; }
         public ProductVersionOperatingSystem ProductVersionOperatingSystem { get; set; }
+
+        public TicketResolution TicketResolution { get; set; }
     }
 }

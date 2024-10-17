@@ -4,7 +4,7 @@ namespace NexaWorks.Models.Entities
 {
     public class ProductVersionOperatingSystem
     {
-        public int Id { get; set; }
+        public int ProductVersionOperatingSystemId { get; set; }
 
         [ForeignKey("Version")]
         public int VersionId { get; set; }

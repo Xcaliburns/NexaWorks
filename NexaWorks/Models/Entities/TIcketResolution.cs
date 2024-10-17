@@ -4,7 +4,7 @@ namespace NexaWorks.Models.Entities
 {
     public class TicketResolution
     {
-        public int Id { get; set; }
+        public int TicketResolutionId { get; set; }
         public string ResolutionDescription { get; set; }
         public DateTime ResolutionDate { get; set; }
         [ForeignKey("Ticket")]

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace NexaWorks.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class firstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,26 +54,26 @@ namespace NexaWorks.Migrations
                 name: "OperatingSystems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    OperatingSystemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OperatingSystemName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OperatingSystems", x => x.Id);
+                    table.PrimaryKey("PK_OperatingSystems", x => x.OperatingSystemId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
 
             migrationBuilder.CreateTable(
@@ -185,19 +186,19 @@ namespace NexaWorks.Migrations
                 name: "Versions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    VersionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<float>(type: "real", nullable: false),
+                    VersionName = table.Column<float>(type: "real", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Versions", x => x.Id);
+                    table.PrimaryKey("PK_Versions", x => x.VersionId);
                     table.ForeignKey(
                         name: "FK_Versions_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id",
+                        principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -205,7 +206,7 @@ namespace NexaWorks.Migrations
                 name: "ProductVersionOperatingSystems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ProductVersionOperatingSystemId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VersionId = table.Column<int>(type: "int", nullable: false),
                     OperatingSystemId = table.Column<int>(type: "int", nullable: false),
@@ -213,29 +214,29 @@ namespace NexaWorks.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductVersionOperatingSystems", x => x.Id);
+                    table.PrimaryKey("PK_ProductVersionOperatingSystems", x => x.ProductVersionOperatingSystemId);
                     table.ForeignKey(
                         name: "FK_ProductVersionOperatingSystems_OperatingSystems_OperatingSystemId",
                         column: x => x.OperatingSystemId,
                         principalTable: "OperatingSystems",
-                        principalColumn: "Id");
+                        principalColumn: "OperatingSystemId");
                     table.ForeignKey(
                         name: "FK_ProductVersionOperatingSystems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "Id");
+                        principalColumn: "ProductId");
                     table.ForeignKey(
                         name: "FK_ProductVersionOperatingSystems_Versions_VersionId",
                         column: x => x.VersionId,
                         principalTable: "Versions",
-                        principalColumn: "Id");
+                        principalColumn: "VersionId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    TicketId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
@@ -244,19 +245,19 @@ namespace NexaWorks.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tickets", x => x.Id);
+                    table.PrimaryKey("PK_Tickets", x => x.TicketId);
                     table.ForeignKey(
                         name: "FK_Tickets_ProductVersionOperatingSystems_ProductVersionOperatingSystemId",
                         column: x => x.ProductVersionOperatingSystemId,
                         principalTable: "ProductVersionOperatingSystems",
-                        principalColumn: "Id");
+                        principalColumn: "ProductVersionOperatingSystemId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TicketResolutions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    TicketResolutionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ResolutionDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ResolutionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -264,12 +265,12 @@ namespace NexaWorks.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TicketResolutions", x => x.Id);
+                    table.PrimaryKey("PK_TicketResolutions", x => x.TicketResolutionId);
                     table.ForeignKey(
                         name: "FK_TicketResolutions_Tickets_TicketId",
                         column: x => x.TicketId,
                         principalTable: "Tickets",
-                        principalColumn: "Id",
+                        principalColumn: "TicketId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -330,7 +331,8 @@ namespace NexaWorks.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TicketResolutions_TicketId",
                 table: "TicketResolutions",
-                column: "TicketId");
+                column: "TicketId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ProductVersionOperatingSystemId",

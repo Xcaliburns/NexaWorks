@@ -17,7 +17,7 @@ namespace NexaWorks.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -226,45 +226,45 @@ namespace NexaWorks.Migrations
 
             modelBuilder.Entity("NexaWorks.Models.Entities.OperatingSystem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("OperatingSystemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OperatingSystemId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("OperatingSystemName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("OperatingSystemId");
 
                     b.ToTable("OperatingSystems");
                 });
 
             modelBuilder.Entity("NexaWorks.Models.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductId");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("NexaWorks.Models.Entities.ProductVersionOperatingSystem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProductVersionOperatingSystemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductVersionOperatingSystemId"));
 
                     b.Property<int>("OperatingSystemId")
                         .HasColumnType("int");
@@ -275,7 +275,7 @@ namespace NexaWorks.Migrations
                     b.Property<int>("VersionId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProductVersionOperatingSystemId");
 
                     b.HasIndex("OperatingSystemId");
 
@@ -288,11 +288,11 @@ namespace NexaWorks.Migrations
 
             modelBuilder.Entity("NexaWorks.Models.Entities.Ticket", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TicketId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketId"));
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -307,7 +307,7 @@ namespace NexaWorks.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("TicketId");
 
                     b.HasIndex("ProductVersionOperatingSystemId");
 
@@ -316,11 +316,11 @@ namespace NexaWorks.Migrations
 
             modelBuilder.Entity("NexaWorks.Models.Entities.TicketResolution", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TicketResolutionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketResolutionId"));
 
                     b.Property<DateTime>("ResolutionDate")
                         .HasColumnType("datetime2");
@@ -332,28 +332,29 @@ namespace NexaWorks.Migrations
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("TicketResolutionId");
 
-                    b.HasIndex("TicketId");
+                    b.HasIndex("TicketId")
+                        .IsUnique();
 
                     b.ToTable("TicketResolutions");
                 });
 
             modelBuilder.Entity("NexaWorks.Models.Entities.Version", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VersionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<float>("Name")
-                        .HasColumnType("real");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VersionId"));
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<float>("VersionName")
+                        .HasColumnType("real");
+
+                    b.HasKey("VersionId");
 
                     b.HasIndex("ProductId");
 
@@ -452,8 +453,8 @@ namespace NexaWorks.Migrations
             modelBuilder.Entity("NexaWorks.Models.Entities.TicketResolution", b =>
                 {
                     b.HasOne("NexaWorks.Models.Entities.Ticket", "Ticket")
-                        .WithMany()
-                        .HasForeignKey("TicketId")
+                        .WithOne("TicketResolution")
+                        .HasForeignKey("NexaWorks.Models.Entities.TicketResolution", "TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -484,6 +485,12 @@ namespace NexaWorks.Migrations
             modelBuilder.Entity("NexaWorks.Models.Entities.ProductVersionOperatingSystem", b =>
                 {
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("NexaWorks.Models.Entities.Ticket", b =>
+                {
+                    b.Navigation("TicketResolution")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NexaWorks.Models.Entities.Version", b =>

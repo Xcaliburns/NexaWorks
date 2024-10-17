@@ -2,8 +2,8 @@
 {
     public class OperatingSystem
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int OperatingSystemId { get; set; }
+        public string OperatingSystemName { get; set; }
 
         public ICollection<ProductVersionOperatingSystem> ProductVersionOperatingSystems { get; set; }
 
